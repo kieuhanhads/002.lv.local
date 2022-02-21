@@ -29,9 +29,8 @@ class UserController extends Controller
         ], $request->input('agree'))) {
             return redirect()->route('admin.dashboard')->with('success', 'Đăng nhập thành công');
         }
-
         return back()->withErrors([
-            'email' => 'Email hoặc mật khẩu ko đúng.',
+            'msg' => 'Email hoặc mật khẩu ko đúng.',
         ]);
     }
     public function register()
@@ -42,12 +41,8 @@ class UserController extends Controller
     }
     public function registerStore(RegisterRequest $request)
     {
-        try {
-            User::create($request->all());
-            redirect()->back()->with('msg', 'Đăng ký thành công');
-        } catch (Exception $e) {
-            dd($e);
-        }
+        User::create($request->all());
+        return redirect(route('login'))->with('msg', 'Đăng ký thành công');
     }
     public function forgot()
     {

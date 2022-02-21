@@ -43,6 +43,29 @@
                 </p>
                 </a>
             </li>
+            <li class="nav-item {{Route::is('admin.pcode.*') ? 'menu-open' : ''}}">
+                <a href="{{route('admin.pcode.lists')}}" class="nav-link {{Route::is('admin.pcode.*') ? 'active' : ''}}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                    Mã Sản Phẩm
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.pcode.lists')}}" class="nav-link {{Route::is('admin.pcode.lists') ? 'active' : ''}}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Danh sách mã sản phẩm</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.pcode.add')}}" class="nav-link {{Route::is('admin.pcode.add') ? 'active' : ''}}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Thêm mã sản phẩm mới</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item {{Route::is('admin.post.*') ? 'menu-open' : ''}}">
                 <a href="{{route('admin.post.index')}}" class="nav-link {{Route::is('admin.post.*') ? 'active' : ''}}">
                 <i class="nav-icon fas fa-tachometer-alt"></i>

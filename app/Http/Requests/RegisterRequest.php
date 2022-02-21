@@ -28,9 +28,9 @@ class RegisterRequest extends FormRequest
         return [
             'name'  =>  ['required', 'max:100'],
             'email' =>  ['required', 'email:filter', 'unique:users'],
-            'password'  =>  ['required', 'min:8'],
+            'password'  =>  ['required', 'min:8', 'confirmed'],
             'password_confirmation'  =>  ['required', 'min:8', 'same:password'],
-            'agree' =>  'required'
+            'terms' =>  'required'
         ];
     }
     public function messages()
@@ -60,15 +60,15 @@ class RegisterRequest extends FormRequest
             if ($validator->errors()->count() > 0) {
                 $validator->errors()->add('msg', 'Vui lòng kiểm tra lại dữ liệu!');
             }
-        });
-    }
-
-    protected function prepareForValidation(){
-        if($this->password == $this->password_confirmation){
             $this->merge([
                 'password' => Hash::make($this->password)
             ]);
-        }
+        });
+
+    }
+
+    protected function prepareForValidation(){
+
     }
 
     protected function failedAuthorization(){

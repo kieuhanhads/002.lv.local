@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\PostsController;
+use App\Http\Controllers\Admin\ProductCodeController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,6 +27,11 @@ Route::controller(UserController::class)->group(function(){
 
 Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::prefix('pcode')->controller(ProductCodeController::class)->name('pcode.')->group(function(){
+        Route::get('/', 'lists')->name('lists');
+        Route::get('add', 'add')->name('add');
+    });
 
     Route::prefix('post')->controller(PostsController::class)->name('post.')->group(function(){
         Route::get('/', 'index')->name('index');

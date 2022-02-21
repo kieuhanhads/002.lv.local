@@ -6,9 +6,9 @@
         <a href="/" class="h1"><b>Admin</b></a>
       </div>
       <div class="card-body">
-        <p class="login-box-msg">Đăng ký tài khoản</p>
+
         @error('msg')
-            {{ $message }}
+        <p class="login-box-msg text-danger">{{$message}}</p>
         @enderror
         <form action="{{ route('register') }}" method="post">
           <div class="input-group mb-3">
@@ -57,12 +57,16 @@
           </div>
           <div class="row">
             <div class="col-8">
-              <div class="icheck-primary">
-                <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                <label for="agreeTerms">
-                 Tôi đồng ý <a href="#">điều khoản</a>
-                </label>
-              </div>
+              <div class="form-group mb-0 icheck-primary">
+                <div class="custom-control custom-checkbox">
+                  <input type="checkbox" name="terms" class="custom-control-input @error('terms') is-invalid @enderror" id="agreeTerms" aria-describedby="terms-error">
+                  <label class="custom-control-label" for="agreeTerms">Tôi đồng ý <a href="#">điều khoản</a>.</label>
+                </div>
+                @error('password_confirmation')
+                <span id="terms-error" class="error invalid-feedback" style="display: inline;">Bạn chưa đồng ý với điều khoản</span>
+                @enderror
+            </div>
+
             </div>
             @csrf
             <!-- /.col -->
